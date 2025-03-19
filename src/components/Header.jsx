@@ -8,6 +8,9 @@ import { YOUTUBE_SEARCH_API } from "../utils/constant";
 
 const Header = () => {
   const [searchedQuery, setSearchedQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
   const dispatch = useDispatch();
   const handleHamburgerClick = () => {
     dispatch(toggleMenu());
@@ -26,7 +29,7 @@ const Header = () => {
   const getSearchSuggestions = async () => {
     const data = await fetch(YOUTUBE_SEARCH_API + searchedQuery);
     const json = await data.json();
-    console.log(json[1]);
+    setSuggestions(json[1]);
   };
   return (
     <div className="grid grid-flow-col m-2 ">
@@ -42,13 +45,37 @@ const Header = () => {
         />
       </div>
 
-      <div className="col-span-10 text-center flex justify-center items-center">
-        <input
-          type="text"
-          className="w-1/2 border border-gray-400 p-2 rounded-l-full"
-          value={searchedQuery}
-          onChange={(e) => setSearchedQuery(e.target.value)}
-        />
+      <div className="col-span-10 flex justify-center ">
+        <div className="w-1/2 relative flex flex-col justify-center items-center">
+          <input
+            type="text"
+            className="w-full border border-gray-400 p-2 rounded-l-full"
+            value={searchedQuery}
+            onChange={(e) => setSearchedQuery(e.target.value)}
+            onFocus={() => {
+              setShowSuggestions(true);
+            }}
+            onBlur={() => {
+              setShowSuggestions(false);
+            }}
+          />
+
+          {showSuggestions && (
+            <div className="w-full bg-white shadow-lg b rounded-lg ml-1 mt-1 absolute top-full z-10">
+              <ul>
+                {suggestions.map((suggestion) => (
+                  <li
+                    key={suggestion}
+                    className="p-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => setSearchedQuery(suggestion)}
+                  >
+                    {suggestion}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
         <button className="border border-gray-400 bg-gray-200 px-4 py-2 rounded-r-full cursor-pointer ">
           <CiSearch className="text-2xl" />
         </button>
