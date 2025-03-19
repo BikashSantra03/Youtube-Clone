@@ -3,6 +3,7 @@ import VideoCard from "./Videocard";
 import Shimmer from "./Shimmer";
 import { NavLink } from "react-router";
 import { AdVideoCard } from "./Videocard";
+import { YOUTUBE_KEY, YOUTUBE_VIDEO_API } from "../utils/constant";
 const VideoContainer = () => {
   const [videos, setvideos] = useState([]);
 
@@ -10,11 +11,9 @@ const VideoContainer = () => {
     getVideos();
   }, []);
   const getVideos = async () => {
-    const data = await fetch(
-      "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=IN&maxResults=50&key=AIzaSyD4sRm3LSMKEHmGmXeQhxOBEz83C4cTyPY"
-    );
+    const data = await fetch(YOUTUBE_VIDEO_API + YOUTUBE_KEY);
     const json = await data.json();
-    console.log(json.items);
+
     setvideos(json.items);
   };
 
