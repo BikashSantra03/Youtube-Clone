@@ -31,4 +31,11 @@ const VideoCard = ({ videoInfo }) => {
   );
 };
 
+export const AdVideoCard = ({ videoInfo }) => {
+  return (
+    <div className=" border border-red-600">
+      <VideoCard videoInfo={videoInfo} />
+    </div>
+  );
+};
 export default VideoCard;

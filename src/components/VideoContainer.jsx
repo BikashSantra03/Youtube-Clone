@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import VideoCard from "./Videocard";
 import Shimmer from "./Shimmer";
 import { NavLink } from "react-router";
-
+import { AdVideoCard } from "./Videocard";
 const VideoContainer = () => {
   const [videos, setvideos] = useState([]);
 
@@ -23,11 +23,14 @@ const VideoContainer = () => {
       {videos.length == 0 ? (
         <Shimmer />
       ) : (
-        videos.map((video) => (
-          <NavLink to={`/watch?v=${video.id}`}>
-            <VideoCard key={video.id} videoInfo={video}  />
-          </NavLink>
-        ))
+        <>
+          <AdVideoCard videoInfo={videos[0]} />
+          {videos.map((video) => (
+            <NavLink to={`/watch?v=${video.id}`} key={video.id}>
+              <VideoCard videoInfo={video} />
+            </NavLink>
+          ))}
+        </>
       )}
     </div>
   );
