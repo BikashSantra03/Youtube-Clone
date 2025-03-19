@@ -17,3 +17,11 @@
 
 - npm i react-router
 -
+
+
+# Setting Up Redux-Toolkit
+ -npm install @reduxjs/toolkit
+ -npm install react-redux
+
+# Youtube Video published time calculation
+ -npm install moment
