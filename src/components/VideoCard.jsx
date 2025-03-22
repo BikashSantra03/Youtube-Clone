@@ -33,7 +33,8 @@ const VideoCard = ({ videoInfo }) => {
 
 export const AdVideoCard = ({ videoInfo }) => {
   return (
-    <div className=" border border-red-600">
+    <div className=" relative">
+      <span className="absolute z-10 px-2 mx-2 font-bold  border border-black rounded-md bg-gray-300">Ad</span>
       <VideoCard videoInfo={videoInfo} />
     </div>
   );

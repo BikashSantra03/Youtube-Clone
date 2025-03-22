@@ -2,23 +2,29 @@ import React, { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { FaUserCircle } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { YOUTUBE_SEARCH_API } from "../utils/constant";
+import { cacheResults } from "../utils/searchSlice";
 
 const Header = () => {
   const [searchedQuery, setSearchedQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
+  const searchCache = useSelector((store) => store.search);
+
   const dispatch = useDispatch();
+
   const handleHamburgerClick = () => {
     dispatch(toggleMenu());
   };
 
   useEffect(() => {
     const timefn = setTimeout(() => {
-      getSearchSuggestions();
+      searchCache[searchedQuery]
+        ? setSuggestions(searchCache[searchedQuery])
+        : getSearchSuggestions();
     }, 200);
 
     return () => {
@@ -30,6 +36,7 @@ const Header = () => {
     const data = await fetch(YOUTUBE_SEARCH_API + searchedQuery);
     const json = await data.json();
     setSuggestions(json[1]);
+    dispatch(cacheResults({ [searchedQuery]: json[1] }));
   };
   return (
     <div className="grid grid-flow-col m-2 ">
@@ -56,7 +63,9 @@ const Header = () => {
               setShowSuggestions(true);
             }}
             onBlur={() => {
-              setShowSuggestions(false);
+              setTimeout(() => {
+                setShowSuggestions(false);
+              }, 200); // Small delay to select the suggestions
             }}
           />
 
