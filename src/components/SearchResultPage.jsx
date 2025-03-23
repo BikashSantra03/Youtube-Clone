@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { YOUTUBE_KEY } from "../utils/constant";
 import { NavLink, useSearchParams } from "react-router";
 import SearchedVideoCard from "./SearchedVideoCard";
+import Shimmer from "./Shimmer";
 
 const SearchResultPage = () => {
   const [searchParams] = useSearchParams();
@@ -11,6 +12,11 @@ const SearchResultPage = () => {
 
   useEffect(() => {
     searchResult();
+
+    // Cleanup function to reset searchResults when component unmounts
+    return () => {
+      setSearchResults([]);
+    };
   }, [searchQuery]);
 
   const searchResult = async () => {
@@ -23,7 +29,9 @@ const SearchResultPage = () => {
     console.log(json.items);
     setSearchResults(json.items);
   };
-  return (
+  return searchResults.length == 0 ? (
+    <Shimmer />
+  ) : (
     <div>
       {searchResults.map((result) => (
         <NavLink to={`/watch?v=${result.id.videoId}`} key={result.id.videoId}>
