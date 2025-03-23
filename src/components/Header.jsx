@@ -4,13 +4,16 @@ import { FaUserCircle } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
-import { YOUTUBE_SEARCH_API } from "../utils/constant";
+import { YOUTUBE_KEY, YOUTUBE_SEARCH_API } from "../utils/constant";
 import { cacheResults } from "../utils/searchSlice";
+import { useNavigate } from "react-router";
 
 const Header = () => {
   const [searchedQuery, setSearchedQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+
+  const navigate = useNavigate();
 
   const searchCache = useSelector((store) => store.search);
 
@@ -18,6 +21,10 @@ const Header = () => {
 
   const handleHamburgerClick = () => {
     dispatch(toggleMenu());
+  };
+
+  const handleOnClickSearch = () => {
+    navigate(`/results?search_query=${searchedQuery}`);
   };
 
   useEffect(() => {
@@ -38,6 +45,7 @@ const Header = () => {
     setSuggestions(json[1]);
     dispatch(cacheResults({ [searchedQuery]: json[1] }));
   };
+
   return (
     <div className="grid grid-flow-col m-2 ">
       <div className="flex col-span-1  gap-4">
@@ -85,7 +93,10 @@ const Header = () => {
             </div>
           )}
         </div>
-        <button className="border border-gray-400 bg-gray-200 px-4 py-2 rounded-r-full cursor-pointer ">
+        <button
+          onClick={handleOnClickSearch}
+          className="border border-gray-400 bg-gray-200 px-4 py-2 rounded-r-full cursor-pointer  "
+        >
           <CiSearch className="text-2xl" />
         </button>
       </div>
