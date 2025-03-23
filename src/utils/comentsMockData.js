@@ -4,7 +4,7 @@ export const commentsData = [
     text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia dolorem sint labore accusamus eos in.",
     replies: [
       {
-        userName: "Bikash Santra",
+        userName: "William Jack",
         text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia dolorem sint labore accusamus eos in.",
         replies: [],
       },
@@ -16,20 +16,21 @@ export const commentsData = [
     text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia dolorem sint labore accusamus eos in.",
     replies: [
       {
-        userName: "Bikash Santra",
-        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia dolorem sint labore accusamus eos in.",
+        userName: "John Doe",
+        text: "Amet consectetur adipisicing elit. Cumque vitae eos rerum excepturi rem inventore." 
+        ,
         replies: [
           {
-            userName: "Bikash Santra",
-            text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia dolorem sint labore accusamus eos in.",
+            userName: "Michael Jackson",
+            text: "Edipisicing elit. Mollitia dolorem sint labore accusamus eos in.",
             replies: [
               {
                 userName: "Bikash Santra",
-                text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia dolorem sint labore accusamus eos in.",
+                text: "Consectetur adipisicing elit. Mollitia dolorem sint labore accusamus eos in.",
                 replies: [
                   {
-                    userName: "Bikash Santra",
-                    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia dolorem sint labore accusamus eos in.",
+                    userName: "Wiliam Oxford",
+                    text: "Mollitia dolorem sint labore accusamus eos in.",
                     replies: [],
                   },
                 ],

@@ -31,13 +31,13 @@ const Sidebar = () => {
       </div>
       <div className="mt-4">
         <ul>
-          <li className="flex items-center gap-1 ">
-            <NavLink to="/">
+       
+          <NavLink to="/">
+            <li className="flex items-center gap-1 ">
               <MdHome />
               Home
-            </NavLink>
-          </li>
-
+            </li>{" "}
+          </NavLink>
           <li className="flex items-center gap-1">
             <SiYoutubeshorts />
             Shorts

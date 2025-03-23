@@ -27,6 +27,12 @@ const Header = () => {
     navigate(`/results?search_query=${searchedQuery}`);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      navigate(`/results?search_query=${searchedQuery}`);
+    }
+  };
+
   useEffect(() => {
     const timefn = setTimeout(() => {
       searchCache[searchedQuery]
@@ -75,6 +81,7 @@ const Header = () => {
                 setShowSuggestions(false);
               }, 200); // Small delay to select the suggestions
             }}
+            onKeyDown={handleKeyDown}
           />
 
           {showSuggestions && (
