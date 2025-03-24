@@ -23,10 +23,9 @@ const SearchResultPage = () => {
     const data = await fetch(
       `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
         searchQuery
-      )}&type=video&maxResults=${50}&key=${YOUTUBE_KEY}`
+      )}&type=video&maxResults=50&key=${YOUTUBE_KEY}`
     );
     const json = await data.json();
-    console.log(json.items);
     setSearchResults(json.items);
   };
   return searchResults.length == 0 ? (

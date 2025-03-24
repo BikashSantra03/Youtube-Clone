@@ -4,7 +4,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
-import { YOUTUBE_KEY, YOUTUBE_SEARCH_API } from "../utils/constant";
+import { YOUTUBE_KEY, YOUTUBE_LOGO, YOUTUBE_SEARCH_API } from "../utils/constant";
 import { cacheResults } from "../utils/searchSlice";
 import { useNavigate } from "react-router";
 
@@ -60,7 +60,7 @@ const Header = () => {
           onClick={handleHamburgerClick}
         />
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png"
+          src={YOUTUBE_LOGO}
           alt="Youtube-Logo"
           className="h-7 cursor-pointer"
         />
