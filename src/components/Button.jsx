@@ -1,11 +1,16 @@
-import React from 'react'
+import React from "react";
 
-const Button = ( {btnMame}) => {
+const Button = ({ btnName, handleClick }) => {
   return (
     <div>
-        <button className='px-5 m-5 bg-gray-200 border rounded-md cursor-pointer'>{btnMame}</button>
+      <button
+        onClick={() => handleClick(btnName)}
+        className="px-5 m-5 bg-gray-200 border rounded-md cursor-pointer"
+      >
+        {btnName}
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;

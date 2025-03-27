@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import LiveChatMessages from "./LiveChatMessages";
 import { MY_PROFILE_IMG, YOUTUBE_KEY } from "../utils/constant";
 import { useDispatch, useSelector } from "react-redux";
-import { addMessage } from "../utils/chatSlice";
+import { addMessage, clearMessages } from "../utils/chatSlice";
 
 const LiveChat = ({ videoID }) => {
   const [liveChatId, setLiveChatId] = useState(null);
@@ -17,14 +17,16 @@ const LiveChat = ({ videoID }) => {
     const interval = setInterval(() => {
       if (liveChatId) {
         // Start fetching messages
-        // fetchChatMessages();
+        fetchChatMessages();
       }
     }, 500);
 
+    //when Unmounts
     return () => {
       clearInterval(interval);
+      dispatch(clearMessages()); // Clear Redux store chats
     };
-  }, [liveChatId]);
+  }, [liveChatId, dispatch]);
 
   const getLiveChatId = async () => {
     const response = await fetch(
@@ -88,27 +90,30 @@ const LiveChat = ({ videoID }) => {
         </div>
       ) : null}
 
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
+      {liveChatId && (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
 
-          handleMessageSubmit();
-        }}
-        className="w-full my-1 flex gap-1"
-      >
-        <input
-          type="text"
-          ref={myLiveMessage}
-          placeholder="Chat... "
-          className="w-10/12 p-1 border border-black"
-        />
-        <button
-          onSubmit={handleMessageSubmit}
-          className="w-2/12 pl-1 bg-emerald-300 rounded-md cursor-pointer"
+            handleMessageSubmit();
+          }}
+          className="w-full my-1 flex gap-1"
         >
-          Send
-        </button>
-      </form>
+          <input
+            type="text"
+            ref={myLiveMessage}
+            placeholder="Chat... "
+            className="w-10/12 p-1 border border-black"
+          />
+          <button
+            onSubmit={handleMessageSubmit}
+            type="submit"
+            className="w-2/12 pl-1 bg-emerald-300 rounded-md cursor-pointer"
+          >
+            Send
+          </button>
+        </form>
+      )}
     </>
   );
 };
