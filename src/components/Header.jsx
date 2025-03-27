@@ -4,9 +4,13 @@ import { FaUserCircle } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
-import { YOUTUBE_KEY, YOUTUBE_LOGO, YOUTUBE_SEARCH_API } from "../utils/constant";
+import {
+  YOUTUBE_LOGO,
+  YOUTUBE_SEARCH_API,
+} from "../utils/constant";
 import { cacheResults } from "../utils/searchSlice";
 import { useNavigate } from "react-router";
+import STREAMSPHERE_LOGO  from "../utils/logo.jpg";
 
 const Header = () => {
   const [searchedQuery, setSearchedQuery] = useState("");
@@ -108,6 +112,13 @@ const Header = () => {
         </button>
       </div>
 
+      <div className="col-span-1">
+        <img
+          src={STREAMSPHERE_LOGO}
+          alt="StreamSphere"
+          className=" w-15 h-10"
+        />
+      </div>
       <div className="col-span-1">
         <FaUserCircle className="text-3xl cursor-pointer" />
       </div>
